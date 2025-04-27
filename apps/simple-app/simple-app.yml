@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-app
-  namespace: argocd         # Argo CD-Namespace
+  name: simple-app
+  namespace: default         # Argo CD-Namespace
 spec:
   project: default
   source:
     repoURL: https://github.com/TheMontents/app-of-apps.git
-    path: apps      # relativer Pfad im Repo
+    path: apps/simple-app      # relativer Pfad im Repo
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
