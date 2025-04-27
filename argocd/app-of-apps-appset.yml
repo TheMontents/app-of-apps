@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-appset
+  namespace: argocd
+spec:
+  generators:
+  - directory:
+      # dein Git-Repo mit den Unterordnern unter apps/
+      repoURL: https://github.com/TheMontents/app-of-apps.git
+      revision: HEAD
+      # Pfad relativ zum Repo-Root
+      directory:
+        path: apps
+        recurse: true
+
+  template:
+    metadata:
+      # benutzt den Ordnernamen als Application-Name
+      name: '{{path.basename}}'
+    spec:
+      project: default
+
+      source:
+        repoURL: https://github.com/TheMontents/app-of-apps.git
+        targetRevision: HEAD
+        # jeder Unterordner unter apps/ wird als eigene App-Quelle genutzt
+        path: '{{path}}'
+
+      destination:
+        server: https://kubernetes.default.svc
+        # erzeugt pro App ein eigenes Namespace, z.B. ghost-demo, bookstack-demo…
+        namespace: '{{path.basename}}-demo'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true

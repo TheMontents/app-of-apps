@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/TheMontents/app-of-apps.git
-    path: simple-app      # relativer Pfad im Repo
+    path: apps/simple-app      # relativer Pfad im Repo
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc

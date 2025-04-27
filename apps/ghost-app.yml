@@ -9,7 +9,7 @@ spec:
   # Zeigt auf das Verzeichnis mit deinen plain-YAMLs
   source:
     repoURL: https://github.com/TheMontents/app-of-apps.git
-    path: ghost-app
+    path: apps/ghost-app
     targetRevision: HEAD
 
   destination:
