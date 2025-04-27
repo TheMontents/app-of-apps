@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: simple-app
-  namespace: default         # Argo CD-Namespace
+  namespace: argocd        # Argo CD-Namespace
 spec:
   project: default
   source:
