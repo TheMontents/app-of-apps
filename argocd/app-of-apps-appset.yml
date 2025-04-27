@@ -5,18 +5,15 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - directory:
-      # dein Git-Repo mit den Unterordnern unter apps/
+  - git:
       repoURL: https://github.com/TheMontents/app-of-apps.git
       revision: HEAD
-      # Pfad relativ zum Repo-Root
-      directory:
-        path: apps
-        recurse: true
+      # scan under apps/ for sub-folders
+      directories:
+      - path: apps/*
 
   template:
     metadata:
-      # benutzt den Ordnernamen als Application-Name
       name: '{{path.basename}}'
     spec:
       project: default
@@ -24,12 +21,10 @@ spec:
       source:
         repoURL: https://github.com/TheMontents/app-of-apps.git
         targetRevision: HEAD
-        # jeder Unterordner unter apps/ wird als eigene App-Quelle genutzt
         path: '{{path}}'
 
       destination:
         server: https://kubernetes.default.svc
-        # erzeugt pro App ein eigenes Namespace, z.B. ghost-demo, bookstack-demo…
         namespace: '{{path.basename}}-demo'
 
       syncPolicy:
