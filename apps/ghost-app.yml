@@ -11,8 +11,6 @@ spec:
     repoURL: https://github.com/TheMontents/app-of-apps.git
     path: apps/ghost-app
     targetRevision: HEAD
-    directory:
-      recurse: false
 
   destination:
     server: https://kubernetes.default.svc
