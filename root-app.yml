@@ -8,8 +8,6 @@ spec:
   source:
     repoURL: https://github.com/TheMontents/app-of-apps.git
     path: apps
-    directory:
-      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: default
