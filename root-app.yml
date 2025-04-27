@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/TheMontents/app-of-apps.git
+    path: apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo-root
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
